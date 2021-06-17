@@ -21,7 +21,7 @@ if (process.env.NODE_ENV === 'production') {
 
 app.listen(process.env.PORT || 5000, (error) => {
   if (error) throw error;
-  console.log(`Server running on port ${port}`);
+  console.log('Server running on port', port);
 });
 
 app.get('/test', (req, res) => {
