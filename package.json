@@ -6,8 +6,10 @@
         "npm": "6.14.13"
     },
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "client": "npm start --prefix client",
+        "client": "cd client && yarn start",
+        "server": "nodemon server.js",
+        "build": "cd client && npm run build",
+        "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
         "start": "node server.js"
     },
     "dependencies": {
