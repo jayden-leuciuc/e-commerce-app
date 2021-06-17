@@ -16,7 +16,7 @@ app.get('/', (req, res) => {
   res.json({ success: true });
 });
 
-/*app.post('/payment', (req, res) => {
+app.post('/payment', (req, res) => {
   const body = {
     source: req.body.token.id,
     amount: req.body.amount,
@@ -30,4 +30,4 @@ app.get('/', (req, res) => {
       res.status(200).send({ success: stripeRes });
     }
   });
-}); */
+});
