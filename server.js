@@ -24,6 +24,10 @@ app.listen(process.env.PORT || 5000, (error) => {
   console.log(`Server running on port ${port}`);
 });
 
+app.get('/test', (req, res) => {
+  res.json({ working: true });
+});
+
 app.post('/payment', (req, res) => {
   const body = {
     source: req.body.token.id,
