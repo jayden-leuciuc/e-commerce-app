@@ -4,22 +4,19 @@ const path = require('path');
 
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
-const app = express();
-const port = process.env.PORT || 5000;
+var app = express();
+const PORT = process.env.PORT || 5000;
 
-app.use(bodyParser.json);
-app.use(bodyParser.urlencoded({ extended: true }));
-
-app.listen(port, (error) => {
-  if (error) throw error;
-  console.log(`Server running on port ${port}`);
+app.listen(PORT, function (err) {
+  if (err) console.log('Error in server');
+  console.log('Server started on port', PORT);
 });
 
 app.get('/', (req, res) => {
   res.json({ success: true });
 });
 
-app.post('/payment', (req, res) => {
+/*app.post('/payment', (req, res) => {
   const body = {
     source: req.body.token.id,
     amount: req.body.amount,
@@ -33,4 +30,4 @@ app.post('/payment', (req, res) => {
       res.status(200).send({ success: stripeRes });
     }
   });
-});
+}); */
