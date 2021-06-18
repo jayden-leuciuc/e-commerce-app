@@ -1,11 +1,14 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
+const compression = require('compression');
 
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 var app = express();
 const PORT = process.env.PORT || 5000;
+
+app.use(compression());
 
 app.listen(PORT, function (err) {
   if (err) console.log('Error in server');
