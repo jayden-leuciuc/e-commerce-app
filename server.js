@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const enforce = require('express-sslify');
 
 if (process.env.NODE_ENV !== 'production') require('dotenv').config();
 
@@ -9,6 +10,7 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 if (process.env.NODE_ENV === 'production') {
+  app.use(enforce.HTTPS({ trustProtoHeader: true }));
   app.use(express.static('client/build'));
 
   app.get('*', (req, res) =>
@@ -19,6 +21,14 @@ if (process.env.NODE_ENV === 'production') {
 app.listen(port, (error) => {
   if (error) throw error;
   console.log('Server running on port ' + port);
+});
+
+app.get('/', (req, res) => {
+  res.send({ working: true });
+});
+
+app.get('./service-worker.js', (req, res) => {
+  res.send(path.resolve(__dirname, '..', 'build', 'service-worker.js'));
 });
 
 app.post('/payment', (req, res) => {
@@ -35,8 +45,4 @@ app.post('/payment', (req, res) => {
       res.status(200).send({ success: stripeRes });
     }
   });
-});
-
-app.get('/', (req, res) => {
-  res.send({ working: true });
 });
